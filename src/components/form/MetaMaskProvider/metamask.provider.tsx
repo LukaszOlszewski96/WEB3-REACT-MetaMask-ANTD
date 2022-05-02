@@ -6,41 +6,31 @@ interface MetaMaskProviderProps {
 }
 
 export const MetaMaskProvider: FC<MetaMaskProviderProps> = ({ children }) => {
-  const [account, setAccount] = useState<string>("");
-  const [contract, setContract] = useState(null);
+  const [contract, setContract] = useState<string>();
 
   const { ethereum } = window;
 
+  //Connect with metamask account and get wallet contract
   const connectMetaMask = async () => {
     try {
       const account = await ethereum.request({
         method: "eth_requestAccounts",
       });
-      setAccount(account[0]);
+      setContract(account[0]);
       localStorage.setItem("shouldConnectMetamask", "true");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getAccountContract = async () => {
-    try {
-      const account = await ethereum.request({ method: "eth_accounts" });
-      setContract(account[0]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getAccountContract();
     if (localStorage.getItem("shouldConnectMetamask") === "true") {
       connectMetaMask();
     }
   }, []);
 
   return (
-    <MetaMaskContext.Provider value={{ account, contract, connectMetaMask }}>
+    <MetaMaskContext.Provider value={{ contract, connectMetaMask }}>
       {children}
     </MetaMaskContext.Provider>
   );

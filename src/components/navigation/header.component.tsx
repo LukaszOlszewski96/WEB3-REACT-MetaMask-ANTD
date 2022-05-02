@@ -8,7 +8,7 @@ import { Layout, Menu } from "antd";
 import { ShortenAddress } from "../../utils/shortenAddress";
 
 export const HeaderNavigation: React.FC = () => {
-  const { contract, account } = useContext(MetaMaskContext) as IMetaMaskContext;
+  const { contract } = useContext(MetaMaskContext) as IMetaMaskContext;
 
   const { Header } = Layout;
 
@@ -25,7 +25,7 @@ export const HeaderNavigation: React.FC = () => {
           <Link to="/dashboard">Dashboard</Link>
         </Menu.Item>
         <Menu.Item className=" py-2 px-4 leading-none flex justify-center items-center rounded-lg bg-[#4948E0] text-lg text-white font-medium cursor-pointer ">
-          {account ? (
+          {contract ? (
             <div className="flex space-x-1">
               <p>Logout:</p>
               <p>{ShortenAddress(contract)}</p>

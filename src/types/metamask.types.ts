@@ -1,21 +1,17 @@
 export type MetaMaskInit = {
-  account: null;
-  contract: null;
+  contract?: null;
 };
 
 export type MetaMaskUnavailable = {
-  account: null;
-  contract: null;
+  contract?: null;
 };
 
 export type MetaMaskNotConnected = {
-  account: null;
-  contract: null;
+  contract?: null;
 };
 
 export type MetaMaskConnected = {
-  account: string;
-  contract: any;
+  contract?: string;
 };
 
 export type MetaMaskState =
